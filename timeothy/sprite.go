@@ -40,15 +40,15 @@ func (s *Sprite) Update(g *Game) error {
 }
 
 func (s *Sprite) Draw(screen *ebiten.Image, g *Game, op *ebiten.DrawImageOptions) {
-  nw, nh := s.getMainTile().subImage.Size()
-  w, h := float64(nw), float64(nh)
-  xr, yr := w / 2.0, h / 2.0              /* x and y radius */
+  //nw, nh := s.getMainTile().subImage.Size()
+  //w, h := float64(nw), float64(nh)
+  //xr, yr := w / 2.0, h / 2.0              /* x and y radius */
 
   op.GeoM.Reset()
   op.GeoM.Scale(g.xscl, g.yscl)
-  op.GeoM.Translate(-xr, -yr)
-  op.GeoM.Rotate(s.angle)
-  op.GeoM.Translate(xr, yr)
+  //op.GeoM.Translate(-xr, -yr)
+  //op.GeoM.Rotate(s.angle)
+  //op.GeoM.Translate(xr, yr)
   op.GeoM.Translate(g.xscl * float64(s.x), g.yscl * float64(s.y))
 
   screen.DrawImage(s.getMainTile().subImage, op)

@@ -29,6 +29,6 @@ func init() {
 
   pixelPlatformerSsCharactersImageIm, _, _ /*err*/ := image.Decode(bytes.NewReader(pixelPlatformerSsCharactersBytes))
   pixelPlatformerSsCharactersImage = ebiten.NewImageFromImage(pixelPlatformerSsCharactersImageIm)
-  characterTilemap = NewTileMap(pixelPlatformerSsCharactersImage, 9, 3, 1, 1, 18, 18, "")
+  characterTilemap = NewTileMap(pixelPlatformerSsCharactersImage, 9, 3, 3, 3, 23, 23, "")
 }
 

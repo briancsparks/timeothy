@@ -34,36 +34,30 @@ func (g *Game) init() {
 
   g.xscl, g.yscl = 2.0, 2.0
 
-  sheetSpriteWidth := 20
-  sheetSpriteHeight := 9
-  spritePixelWidth := 18
-  spritePixelHeight := 18
-  //spritePixelXSpace := 1
-  //spritePixelYSpace := 1
+  for _, tile := range characterTilemap.tiles {
+   tilemap := tile.parentMap
+   g.allTiles = append(g.allTiles, NewSprite2(
+     tile,
+     tile.x * tilemap.tilePixelWidth,
+     tile.y * tilemap.tilePixelHeight,
+     1,
+     1,
+     math.Pi / 4.0,
+     rand.Float64() * (math.Pi / 6.0),
+   ))
+  }
 
-  // 20 x 9
-  index := 0
-  for i := 0; i < sheetSpriteWidth; i++ {
-    for j := 0; j < sheetSpriteHeight; j++ {
-
-      //sub := subSpriteRect(tilePixelWidth, tilePixelHeight, spritePixelXSpace, spritePixelYSpace, i, j)   /* my location on the tile map */
-      //sub := platformTilemap.subSpriteRect(i, j)
-      tiles := platformTilemap.getTiles([]int{index})
-      mainTile := tiles[0]
-
-      g.allTiles = append(g.allTiles, NewSprite2(
-        mainTile,
-        //pixelPlatformerSsTilemapImage.SubImage(sub).(*ebiten.Image),
-        i * spritePixelWidth,
-        j * spritePixelHeight,
-        1,
-        1,
-        math.Pi / 4.0,
-        rand.Float64() * (math.Pi / 6.0),
-      ))
-
-      index += 1
-    }
+  for _, tile := range platformTilemap.tiles {
+   tilemap := tile.parentMap
+   g.allTiles = append(g.allTiles, NewSprite2(
+     tile,
+     tile.x * tilemap.tilePixelWidth,
+     tile.y * tilemap.tilePixelHeight,
+     1,
+     1,
+     math.Pi / 4.0,
+     rand.Float64() * (math.Pi / 6.0),
+   ))
   }
 }
 
