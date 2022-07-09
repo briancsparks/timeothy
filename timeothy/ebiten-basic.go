@@ -3,7 +3,6 @@ package timeothy
 /* Copyright © 2022 Brian C Sparks <briancsparks@gmail.com> -- MIT (see LICENSE file) */
 
 import (
-  "fmt"
   "github.com/hajimehoshi/ebiten/v2"
   "log"
   "math"
@@ -15,8 +14,11 @@ var (
   ebitenImage *ebiten.Image
 )
 
-func foobar() {
-	fmt.Printf("\n")
+var startTime, lastTime time.Time
+
+func init() {
+  startTime = time.Now()
+  //lastTime = time.Now()
 }
 
 type Game struct {
@@ -27,6 +29,24 @@ type Game struct {
   inited      bool
 }
 
+func (g *Game) addTiles(tilemap *TileMap) {
+
+  //roguelikecityTilemap.tiles
+  //roguelikecityAsset.Tilemap.tiles
+  for _, tile := range tilemap.tiles {
+    tilemap := tile.parentMap
+    g.allTiles = append(g.allTiles, NewSprite2(
+      tile,
+      tile.x * tilemap.spritePixelWidth,
+      tile.y * tilemap.spritePixelHeight,
+      1,
+      1,
+      math.Pi / 4.0,
+      rand.Float64() * (math.Pi / 6.0),
+    ))
+  }
+}
+
 func (g *Game) init() {
   defer func() {
     g.inited = true
@@ -34,42 +54,11 @@ func (g *Game) init() {
 
   g.xscl, g.yscl = 2.0, 2.0
 
-  for _, tile := range characterTilemap.tiles {
-   tilemap := tile.parentMap
-   g.allTiles = append(g.allTiles, NewSprite2(
-     tile,
-     tile.x * tilemap.tilePixelWidth,
-     tile.y * tilemap.tilePixelHeight,
-     1,
-     1,
-     math.Pi / 4.0,
-     rand.Float64() * (math.Pi / 6.0),
-   ))
-  }
-
-  for _, tile := range platformTilemap.tiles {
-   tilemap := tile.parentMap
-   g.allTiles = append(g.allTiles, NewSprite2(
-     tile,
-     tile.x * tilemap.tilePixelWidth,
-     tile.y * tilemap.tilePixelHeight,
-     1,
-     1,
-     math.Pi / 4.0,
-     rand.Float64() * (math.Pi / 6.0),
-   ))
-  }
+  g.addTiles(roguelikecityAsset.Tilemap)
+  //g.addTiles(characterTilemap)
+  //g.addTiles(platformTilemap)
+  //g.addTiles(roguelikeCharacterTilemap)
 }
-
-//func subSpriteRect(pxWidth, pxHeight, pxXSpace, pxYSpace, x, y int) image.Rectangle {
-//  left := x * (pxWidth + pxXSpace)
-//  right := left + pxWidth
-//
-//  top := y * (pxHeight + pxYSpace)
-//  bottom := top + pxHeight
-//
-//  return image.Rect(left, top, right, bottom)
-//}
 
 func (g *Game) leftTouched() bool {
 
@@ -98,13 +87,6 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
   return outsideWidth, outsideHeight
 }
 
-var startTime, lastTime time.Time
-
-func init() {
-  startTime = time.Now()
-  //lastTime = time.Now()
-}
-
 func (g *Game) Draw(screen *ebiten.Image) {
   drawTime := time.Now()
   /*elapsed*/_ = drawTime.Sub(lastTime)
@@ -116,7 +98,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
   op.GeoM.Scale(2.0, 2.0)
 
   for _, sprite := range g.allTiles {
-    //screen.DrawImage(sprite.subImage, op)
     sprite.Draw(screen, g, op)
   }
 

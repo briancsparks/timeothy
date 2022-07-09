@@ -14,12 +14,12 @@ func asdf() {
 }
 
 type TileMap struct {
-  sheetTileWidth        int
-  sheetTileHeight       int
-  sheetPixelXSpace      int
-  sheetPixelYSpace      int
-  tilePixelWidth        int
-  tilePixelHeight       int
+  sheetSpriteWidth  int
+  sheetSpriteHeight int
+  sheetPixelXSpace  int
+  sheetPixelYSpace int
+  spritePixelWidth  int
+  spritePixelHeight int
 
   tilemap              *ebiten.Image
   tiles                 []*Tile
@@ -31,20 +31,26 @@ type TileMap struct {
 func NewTileMap(tilemap *ebiten.Image, sheetSpriteWidth int, sheetSpriteHeight int, sheetPixelXSpace int, sheetPixelYSpace int,
       spritePixelWidth int, spritePixelHeight int, filename string) *TileMap {
 
+  if sheetSpriteWidth == -1 {
+    sheetPixelWidth, sheetPixelHeight := tilemap.Size()
+    sheetSpriteWidth = sheetPixelWidth / (spritePixelWidth + sheetPixelXSpace)
+    sheetSpriteHeight = sheetPixelHeight / (spritePixelHeight + sheetPixelYSpace)
+  }
+
   tm := &TileMap{
-    sheetTileWidth:   sheetSpriteWidth,
-    sheetTileHeight:  sheetSpriteHeight,
-    sheetPixelXSpace: sheetPixelXSpace,
-    sheetPixelYSpace: sheetPixelYSpace,
-    tilePixelWidth:   spritePixelWidth,
-    tilePixelHeight:  spritePixelHeight,
-    tilemap:          tilemap,
-    filename:         filename,
+    sheetSpriteWidth:  sheetSpriteWidth,
+    sheetSpriteHeight: sheetSpriteHeight,
+    sheetPixelXSpace:  sheetPixelXSpace,
+    sheetPixelYSpace:  sheetPixelYSpace,
+    spritePixelWidth:  spritePixelWidth,
+    spritePixelHeight: spritePixelHeight,
+    tilemap:           tilemap,
+    filename:          filename,
   }
 
   index := 0
-  for i := 0; i < tm.sheetTileWidth; i++ {
-    for j := 0; j < tm.sheetTileHeight; j++ {
+  for j := 0; j < tm.sheetSpriteHeight; j++ {
+    for i := 0; i < tm.sheetSpriteWidth; i++ {
       sub := tm.subSpriteRect(i, j)
       t := NewTile(tm, sub, i, j, index)
       tm.tiles = append(tm.tiles, t)
@@ -66,20 +72,20 @@ func (tm *TileMap) getTiles(indexes []int) []*Tile {
 
 
 func (tm *TileMap) subSpriteRect( /*pxWidth, pxHeight, pxXSpace, pxYSpace,*/ x, y int) image.Rectangle {
-  left := x * (tm.tilePixelWidth + tm.sheetPixelXSpace)
-  right := left + tm.tilePixelWidth
+  left := x * (tm.spritePixelWidth + tm.sheetPixelXSpace)
+  right := left + tm.spritePixelWidth
 
-  top := y * (tm.tilePixelHeight + tm.sheetPixelYSpace)
-  bottom := top + tm.tilePixelHeight
+  top := y * (tm.spritePixelHeight + tm.sheetPixelYSpace)
+  bottom := top + tm.spritePixelHeight
 
   return image.Rect(left, top, right, bottom)
 }
 
 
 func (tm *TileMap) tileWidth() int {
-  return tm.sheetTileWidth
+  return tm.sheetSpriteWidth
 }
 
 func (tm *TileMap) tileHeight() int {
-  return tm.sheetTileHeight
+  return tm.sheetSpriteHeight
 }
