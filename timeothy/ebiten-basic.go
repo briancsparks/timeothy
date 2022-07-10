@@ -31,8 +31,6 @@ type Game struct {
 
 func (g *Game) addTiles(tilemap *TileMap) {
 
-  //roguelikecityTilemap.tiles
-  //roguelikecityAsset.Tilemap.tiles
   for _, tile := range tilemap.tiles {
     tilemap := tile.parentMap
     g.allTiles = append(g.allTiles, NewSprite2(
@@ -54,10 +52,11 @@ func (g *Game) init() {
 
   g.xscl, g.yscl = 2.0, 2.0
 
-  g.addTiles(roguelikecityAsset.Tilemap)
-  //g.addTiles(characterTilemap)
-  //g.addTiles(platformTilemap)
-  //g.addTiles(roguelikeCharacterTilemap)
+  //g.addTiles(roguelikecityAsset.Tilemap)
+  //g.addTiles(platformTilemapAsset.Tilemap)
+  //g.addTiles(characterTilemapAsset.Tilemap)
+  g.addTiles(roguelikeCharacterTilemapAsset.Tilemap)
+
 }
 
 func (g *Game) leftTouched() bool {

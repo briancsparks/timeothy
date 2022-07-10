@@ -33,8 +33,8 @@ func NewTileMap(tilemap *ebiten.Image, sheetSpriteWidth int, sheetSpriteHeight i
 
   if sheetSpriteWidth == -1 {
     sheetPixelWidth, sheetPixelHeight := tilemap.Size()
-    sheetSpriteWidth = sheetPixelWidth / (spritePixelWidth + sheetPixelXSpace)
-    sheetSpriteHeight = sheetPixelHeight / (spritePixelHeight + sheetPixelYSpace)
+    sheetSpriteWidth = (sheetPixelWidth + 1) / (spritePixelWidth + sheetPixelXSpace)
+    sheetSpriteHeight = (sheetPixelHeight + 1) / (spritePixelHeight + sheetPixelYSpace)
   }
 
   tm := &TileMap{
