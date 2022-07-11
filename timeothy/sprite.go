@@ -54,11 +54,17 @@ func (s *Sprite) Update(g *Game) error {
 
 // -------------------------------------------------------------------------------------------------------------------
 
+type Drawer interface {
+  Draw(screen *ebiten.Image, g *Game, op *ebiten.DrawImageOptions)
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+
 func (s *Sprite) Draw(screen *ebiten.Image, g *Game, op *ebiten.DrawImageOptions) {
 
   op.GeoM.Reset()
   op.GeoM.Scale(g.xscl, g.yscl)
-  s.DrawRotation(screen, g, op)
+  //s.DrawRotation(screen, g, op)
   op.GeoM.Translate(g.xscl * float64(s.x), g.yscl * float64(s.y))
 
   screen.DrawImage(s.getMainTile().subImage, op)
@@ -67,10 +73,6 @@ func (s *Sprite) Draw(screen *ebiten.Image, g *Game, op *ebiten.DrawImageOptions
 // -------------------------------------------------------------------------------------------------------------------
 
 func (s *Sprite) DrawRotation(screen *ebiten.Image, g *Game, op *ebiten.DrawImageOptions) {
-  //nw, nh := s.getMainTile().subImage.Size()
-  //w, h := float64(nw), float64(nh)
-  //xr, yr := w / 2.0, h / 2.0              /* x and y radius */
-
   op.GeoM.Translate(-s.rx, -s.ry)
   op.GeoM.Rotate(s.angle)
   op.GeoM.Translate(s.rx, s.ry)
