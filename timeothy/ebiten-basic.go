@@ -3,6 +3,7 @@ package timeothy
 /* Copyright © 2022 Brian C Sparks <briancsparks@gmail.com> -- MIT (see LICENSE file) */
 
 import (
+  "fmt"
   "github.com/hajimehoshi/ebiten/v2"
   "log"
   "math"
@@ -23,6 +24,7 @@ func init() {
 
 type Game struct {
   allTiles    []*Sprite
+  lucky       *Sprite
   xscl, yscl  float64
   touchIDs    []ebiten.TouchID
   op          ebiten.DrawImageOptions
@@ -55,7 +57,16 @@ func (g *Game) init() {
   //g.addTiles(roguelikecityAsset.Tilemap)
   //g.addTiles(platformTilemapAsset.Tilemap)
   //g.addTiles(characterTilemapAsset.Tilemap)
-  g.addTiles(roguelikeCharacterTilemapAsset.Tilemap)
+  //g.addTiles(roguelikeCharacterTilemapAsset.Tilemap)
+  //g.addTiles(colorBlendTilemapAsset.Tilemap)
+  g.addTiles(timothyZeroTilemapAsset.Tilemap)
+
+  seed := time.Now().UnixNano()
+  fmt.Printf("Using random seed: %v\n", seed)
+  rand.Seed(seed)
+  //luckyIndex := int(float64(len(g.allTiles)) * rand.Float64())
+  luckyIndex := 30
+  g.lucky = g.allTiles[luckyIndex]
 
 }
 
@@ -96,9 +107,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
   op := &ebiten.DrawImageOptions{}
   op.GeoM.Scale(2.0, 2.0)
 
-  for _, sprite := range g.allTiles {
-    sprite.Draw(screen, g, op)
-  }
+  //for _, sprite := range g.allTiles {
+  // sprite.Draw(screen, g, op)
+  //}
+
+  g.lucky.Draw(screen, g, op)
 
   lastTime = drawTime
 }

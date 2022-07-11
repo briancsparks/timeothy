@@ -27,6 +27,13 @@ var roguelikeSsCharactersBytes []byte
 //var roguelikeSsCharactersImage *ebiten.Image
 //var roguelikeCharacterTilemap *TileMap
 
+//go:embed assets/colorblend.png
+var colorBlendBytes []byte
+
+//go:embed assets/timothy-zero-tilemap.png
+var timothyZeroBytes []byte
+
+
 // --------------------------------------------------------------------------------------------------------------------
 
 var roguelikecityAsset *TilemapAsset
@@ -46,6 +53,9 @@ var platformTilemapAsset              *TilemapAsset
 var characterTilemapAsset             *TilemapAsset
 var roguelikeCharacterTilemapAsset    *TilemapAsset
 
+var colorBlendTilemapAsset            *TilemapAsset
+var timothyZeroTilemapAsset            *TilemapAsset
+
 func init() {
   roguelikecityAsset = MakeTilemapFromBytesAndXml(roguelikecitySSBytes, roguelikecityTsxBytes, "assets/kenney/roguelike-city-pack/spritesheet/roguelikecity_magenta.png")
 
@@ -60,6 +70,8 @@ func init() {
   //characterTilemap = NewTileMap(pixelPlatformerSsCharactersImage, 9, 3, 3, 3, 23, 23, "")
 
   characterTilemapAsset = MakeTilemapFromBytes(pixelPlatformerSsCharactersBytes, "", 9, 3, 3, 3, 23, 23, "")
+  colorBlendTilemapAsset = MakeTilemapFromBytes(colorBlendBytes, "", 10, 5, 0, 0, 40, 40, "")
+  timothyZeroTilemapAsset = MakeTilemapFromBytes(timothyZeroBytes, "", -1, -1, 0, 0, 32, 128, "")
 
   //roguelikeSsCharactersImageIm, _, _ /*err*/ := image.Decode(bytes.NewReader(roguelikeSsCharactersBytes))
   //roguelikeSsCharactersImage = ebiten.NewImageFromImage(roguelikeSsCharactersImageIm)

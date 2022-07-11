@@ -3,7 +3,6 @@ package timeothy
 /* Copyright © 2022 Brian C Sparks <briancsparks@gmail.com> -- MIT (see LICENSE file) */
 
 import (
-	"fmt"
   "github.com/hajimehoshi/ebiten/v2"
   "image"
 )
@@ -27,6 +26,3 @@ func NewTile(parentMap *TileMap, subRect image.Rectangle, x, y, n int) *Tile {
   }
 }
 
-func tile() {
-	fmt.Printf("\n")
-}
