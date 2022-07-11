@@ -1,8 +1,6 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
+
+/* Copyright © 2022 Brian C Sparks <briancsparks@gmail.com> -- MIT (see LICENSE file) */
 
 import (
 	"fmt"
@@ -10,6 +8,8 @@ import (
 
   "github.com/spf13/cobra"
 )
+
+// -------------------------------------------------------------------------------------------------------------------
 
 // playCmd represents the play command
 var playCmd = &cobra.Command{
@@ -21,6 +21,8 @@ var playCmd = &cobra.Command{
     timeothy.TimEbitenMain()
 	},
 }
+
+// -------------------------------------------------------------------------------------------------------------------
 
 func init() {
 	rootCmd.AddCommand(playCmd)

@@ -7,6 +7,8 @@ import (
   "image"
 )
 
+// -------------------------------------------------------------------------------------------------------------------
+
 type Tile struct {
   parentMap    *TileMap
   subImage     *ebiten.Image
@@ -14,6 +16,8 @@ type Tile struct {
   subRect       image.Rectangle
   x, y, n       int
 }
+
+// -------------------------------------------------------------------------------------------------------------------
 
 func NewTile(parentMap *TileMap, subRect image.Rectangle, x, y, n int) *Tile {
   return &Tile{

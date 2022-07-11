@@ -6,6 +6,8 @@ import (
   "github.com/hajimehoshi/ebiten/v2"
 )
 
+// -------------------------------------------------------------------------------------------------------------------
+
 type Sprite struct {
   //subImage     *ebiten.Image
   tiles         []*Tile
@@ -16,6 +18,8 @@ type Sprite struct {
   angle         float64
   dtheta        float64
 }
+
+// -------------------------------------------------------------------------------------------------------------------
 
 func NewSprite2(mainTile *Tile, x int, y int, dx int, dy int, angle, dtheta float64) *Sprite {
   s := &Sprite{
@@ -35,14 +39,20 @@ func NewSprite2(mainTile *Tile, x int, y int, dx int, dy int, angle, dtheta floa
   return s
 }
 
+// -------------------------------------------------------------------------------------------------------------------
+
 func (s *Sprite) getMainTile() *Tile {
   return s.tiles[0]
 }
+
+// -------------------------------------------------------------------------------------------------------------------
 
 func (s *Sprite) Update(g *Game) error {
   s.angle += s.dtheta
   return nil
 }
+
+// -------------------------------------------------------------------------------------------------------------------
 
 func (s *Sprite) Draw(screen *ebiten.Image, g *Game, op *ebiten.DrawImageOptions) {
 
@@ -54,6 +64,8 @@ func (s *Sprite) Draw(screen *ebiten.Image, g *Game, op *ebiten.DrawImageOptions
   screen.DrawImage(s.getMainTile().subImage, op)
 }
 
+// -------------------------------------------------------------------------------------------------------------------
+
 func (s *Sprite) DrawRotation(screen *ebiten.Image, g *Game, op *ebiten.DrawImageOptions) {
   //nw, nh := s.getMainTile().subImage.Size()
   //w, h := float64(nw), float64(nh)
@@ -64,6 +76,8 @@ func (s *Sprite) DrawRotation(screen *ebiten.Image, g *Game, op *ebiten.DrawImag
   op.GeoM.Translate(s.rx, s.ry)
 }
 
+// -------------------------------------------------------------------------------------------------------------------
+
 //func (s *Sprite) GetRadii() (float64, float64) {
 //  nw, nh := s.getMainTile().subImage.Size()
 //  w, h := float64(nw), float64(nh)
@@ -72,6 +86,7 @@ func (s *Sprite) DrawRotation(screen *ebiten.Image, g *Game, op *ebiten.DrawImag
 //  return xr, yr
 //}
 
+// -------------------------------------------------------------------------------------------------------------------
 
 //func NewSprite(image *ebiten.Image, x int, y int, dx int, dy int, angle, dtheta float64) *Sprite {
 // return &Sprite{

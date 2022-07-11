@@ -13,6 +13,8 @@ import (
   "github.com/spf13/viper"
 )
 
+// -------------------------------------------------------------------------------------------------------------------
+
 var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
@@ -30,6 +32,8 @@ to quickly create a Cobra application.`,
 	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
+// -------------------------------------------------------------------------------------------------------------------
+
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
@@ -38,6 +42,8 @@ func Execute() {
 		os.Exit(1)
 	}
 }
+
+// -------------------------------------------------------------------------------------------------------------------
 
 func init() {
   cobra.OnInitialize(initConfig)
@@ -53,6 +59,7 @@ func init() {
 	//rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
+// -------------------------------------------------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------------------------------------------------
 // initConfig reads in config file and ENV variables if set.
@@ -83,10 +90,6 @@ func initConfig() {
     fmt.Println("Using config file:", viper.ConfigFileUsed())
   }
 }
-
-// =====================================================================================================================
-// root.go
-// Put bindFlags into root.go as-is
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Stolen from: https://github.com/carolynvs/stingoftheviper/blob/main/main.go

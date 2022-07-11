@@ -12,20 +12,28 @@ import (
 
 /* Copyright © 2022 Brian C Sparks <briancsparks@gmail.com> -- MIT (see LICENSE file) */
 
+// -------------------------------------------------------------------------------------------------------------------
+
 //go:embed assets/kenney/pixel-platformer/tilemap/tiles.png
 var pixelPlatformerSsTilemapBytes []byte
 //var pixelPlatformerSsTilemapImage *ebiten.Image
 //var platformTilemap *TileMap
+
+// -------------------------------------------------------------------------------------------------------------------
 
 //go:embed assets/kenney/pixel-platformer/tilemap/characters.png
 var pixelPlatformerSsCharactersBytes []byte
 //var pixelPlatformerSsCharactersImage *ebiten.Image
 //var characterTilemap *TileMap
 
+// -------------------------------------------------------------------------------------------------------------------
+
 //go:embed assets/kenney/roguelike-characters-pack/spritesheet/roguelikechar_transparent.png
 var roguelikeSsCharactersBytes []byte
 //var roguelikeSsCharactersImage *ebiten.Image
 //var roguelikeCharacterTilemap *TileMap
+
+// -------------------------------------------------------------------------------------------------------------------
 
 //go:embed assets/colorblend.png
 var colorBlendBytes []byte
@@ -56,6 +64,8 @@ var roguelikeCharacterTilemapAsset    *TilemapAsset
 var colorBlendTilemapAsset            *TilemapAsset
 var timothyZeroTilemapAsset            *TilemapAsset
 
+// -------------------------------------------------------------------------------------------------------------------
+
 func init() {
   roguelikecityAsset = MakeTilemapFromBytesAndXml(roguelikecitySSBytes, roguelikecityTsxBytes, "assets/kenney/roguelike-city-pack/spritesheet/roguelikecity_magenta.png")
 
@@ -79,9 +89,14 @@ func init() {
 
   roguelikeCharacterTilemapAsset = MakeTilemapFromBytes(roguelikeSsCharactersBytes, "", -1, -1, 1, 1, 16, 16, "")
 }
+
+// -------------------------------------------------------------------------------------------------------------------
+
 func (tt *TiledTileset) Rows() int {
   return tt.Tilecount / tt.Columns
 }
+
+// -------------------------------------------------------------------------------------------------------------------
 
 type TilemapAsset struct {
   Tilemap       *TileMap

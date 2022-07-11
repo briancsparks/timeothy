@@ -1,17 +1,13 @@
 package timeothy
 
-/* Copyright © 2022 sparksb -- MIT (see LICENSE file) */
 /* Copyright © 2022 Brian C Sparks <briancsparks@gmail.com> -- MIT (see LICENSE file) */
 
 import (
-	"fmt"
   "github.com/hajimehoshi/ebiten/v2"
   "image"
 )
 
-func asdf() {
-	fmt.Printf("\n")
-}
+// -------------------------------------------------------------------------------------------------------------------
 
 type TileMap struct {
   sheetSpriteWidth  int
@@ -27,6 +23,8 @@ type TileMap struct {
 
   filename              string
 }
+
+// -------------------------------------------------------------------------------------------------------------------
 
 func NewTileMap(tilemap *ebiten.Image, sheetSpriteWidth int, sheetSpriteHeight int, sheetPixelXSpace int, sheetPixelYSpace int,
       spritePixelWidth int, spritePixelHeight int, filename string) *TileMap {
@@ -62,6 +60,8 @@ func NewTileMap(tilemap *ebiten.Image, sheetSpriteWidth int, sheetSpriteHeight i
   return tm
 }
 
+// -------------------------------------------------------------------------------------------------------------------
+
 func (tm *TileMap) getTiles(indexes []int) []*Tile {
   var result []*Tile
   for _, index := range indexes {
@@ -70,6 +70,7 @@ func (tm *TileMap) getTiles(indexes []int) []*Tile {
   return result
 }
 
+// -------------------------------------------------------------------------------------------------------------------
 
 func (tm *TileMap) subSpriteRect( /*pxWidth, pxHeight, pxXSpace, pxYSpace,*/ x, y int) image.Rectangle {
   left := x * (tm.spritePixelWidth + tm.sheetPixelXSpace)
@@ -81,10 +82,13 @@ func (tm *TileMap) subSpriteRect( /*pxWidth, pxHeight, pxXSpace, pxYSpace,*/ x, 
   return image.Rect(left, top, right, bottom)
 }
 
+// -------------------------------------------------------------------------------------------------------------------
 
 func (tm *TileMap) tileWidth() int {
   return tm.sheetSpriteWidth
 }
+
+// -------------------------------------------------------------------------------------------------------------------
 
 func (tm *TileMap) tileHeight() int {
   return tm.sheetSpriteHeight
