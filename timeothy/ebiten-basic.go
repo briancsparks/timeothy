@@ -39,21 +39,6 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 func (g *Game) Draw(screen *ebiten.Image) {
   g.PreDraw(screen)
 
-  op := &ebiten.DrawImageOptions{}
-  op.GeoM.Scale(2.0, 2.0)
-
-  //for _, sprite := range g.allTiles {
-  // sprite.Draw(screen, g, op)
-  //}
-
-  if g.lucky != nil {
-    g.lucky.Draw(screen, g, op)
-  }
-
-  if g.timothy != nil {
-    g.timothy.Draw(screen, g, op)
-  }
-
   g.PostDraw(screen)
 }
 

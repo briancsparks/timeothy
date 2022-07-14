@@ -21,10 +21,12 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
+	github.com/robotn/gohook v0.40.0 // indirect
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/subosito/gotenv v1.3.0 // indirect
+	github.com/vcaesar/keycode v0.10.0 // indirect
 	golang.org/x/exp v0.0.0-20200224162631-6cc2880d07d6 // indirect
 	golang.org/x/image v0.0.0-20220321031419-a8550c1d254a // indirect
 	golang.org/x/mobile v0.0.0-20220518205345-8578da9835fd // indirect

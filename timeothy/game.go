@@ -15,7 +15,7 @@ import (
 
 type Game struct {
   allTiles    []*Sprite
-  timothy     *Sprite
+  timothy     *Timothy
   lucky       *Sprite
   xscl, yscl  float64
   touchIDs    []ebiten.TouchID
@@ -48,6 +48,7 @@ func NewGame(xscl float64, yscl float64) *Game {
   g.frameTimings[3] = 0
   g.frameTimings[4] = 0
   g.frameTimings[5] = 0
+  g.frameTimings[6] = 0
   g.frameTimings[10] = 0
   g.frameTimings[15] = 0
   g.frameTimings[30] = 0
@@ -71,7 +72,7 @@ func (g *Game) init() {
 
   // Must be first!
   g.addTiles(timothyZeroTilemapAsset.Tilemap)
-  g.timothy = g.allTiles[30]
+  g.timothy = NewTimothy(g, 30)
 
   //g.addTiles(roguelikecityAsset.Tilemap)
   //g.addTiles(platformTilemapAsset.Tilemap)
@@ -100,12 +101,20 @@ func (g *Game) PreUpdate() error {
   for i, count := range g.frameTimings {
     newCount := count + 1
     g.frameTimings[i] = newCount
-    if newCount > i {
+    if newCount >= i {
       g.frameTimings[i] = 0
     }
   }
 
   g.gamepad.Update()
+
+  if g.lucky != nil {
+    g.lucky.Update(g)
+  }
+
+  if g.timothy != nil {
+    g.timothy.Update(g)
+  }
 
   return nil
 }
@@ -127,6 +136,22 @@ func (g *Game) PreDraw(screen *ebiten.Image) {
   g.drawIterNum += 1
 
   g.gamepad.Draw(screen)
+
+  // -----------------------------------------------------
+  op := &ebiten.DrawImageOptions{}
+  op.GeoM.Scale(2.0, 2.0)
+
+  //for _, sprite := range g.allTiles {
+  // sprite.Draw(screen, g, op)
+  //}
+
+  if g.lucky != nil {
+    g.lucky.Draw(screen, g, op)
+  }
+
+  if g.timothy != nil {
+    g.timothy.Draw(screen, g, op)
+  }
 }
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -144,6 +169,8 @@ func (g *Game) addTiles(tilemap *TileMap) {
       tile,
       tile.x * tilemap.spritePixelWidth,
       tile.y * tilemap.spritePixelHeight,
+      1,
+      1,
       1,
       1,
       math.Pi / 4.0,

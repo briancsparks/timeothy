@@ -13,7 +13,8 @@ type Sprite struct {
   tiles         []*Tile
 
   x, y          int
-  dx,dy         int
+  fx, fy        float64
+  dx,dy         float64
   rx, ry        float64         /* x and y radii */
   angle         float64
   dtheta        float64
@@ -21,10 +22,12 @@ type Sprite struct {
 
 // -------------------------------------------------------------------------------------------------------------------
 
-func NewSprite2(mainTile *Tile, x int, y int, dx int, dy int, angle, dtheta float64) *Sprite {
+func NewSprite2(mainTile *Tile, x int, y int, fx,fy,dx,dy float64, angle, dtheta float64) *Sprite {
   s := &Sprite{
     x: x,
     y: y,
+    fx: fx,
+    fy: fy,
     dx: dx,
     dy: dy,
     angle: angle,
@@ -37,6 +40,14 @@ func NewSprite2(mainTile *Tile, x int, y int, dx int, dy int, angle, dtheta floa
   s.rx, s.ry = w / 2.0, h / 2.0              /* x and y radius */
 
   return s
+}
+
+func (s*Sprite) CloneProps(that *Sprite) {
+  s.x, s.y = that.x, that.y
+  s.dx, s.dy = that.dx, that.dy
+  s.rx, s.ry = that.rx, that.ry
+  s.angle = that.angle
+  s.dtheta = that.dtheta
 }
 
 // -------------------------------------------------------------------------------------------------------------------

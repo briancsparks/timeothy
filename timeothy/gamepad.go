@@ -173,7 +173,8 @@ func standardMap(id ebiten.GamepadID) string {
     ebiten.StandardGamepadAxisValue(id, ebiten.StandardGamepadAxisLeftStickHorizontal),
     ebiten.StandardGamepadAxisValue(id, ebiten.StandardGamepadAxisLeftStickVertical),
     ebiten.StandardGamepadAxisValue(id, ebiten.StandardGamepadAxisRightStickHorizontal),
-    ebiten.StandardGamepadAxisValue(id, ebiten.StandardGamepadAxisRightStickVertical))
+    ebiten.StandardGamepadAxisValue(id, ebiten.StandardGamepadAxisRightStickVertical),
+  )
   return m
 }
 
